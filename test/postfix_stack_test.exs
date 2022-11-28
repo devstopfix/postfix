@@ -32,6 +32,14 @@ defmodule Postfix.StackTest do
       end
     end
 
+    test "function with zero arity" do
+      assert_eval(self(), [&self/0])
+    end
+
+    test "function with zero arity pushes result" do
+      assert_eval(true, [true, &self/0, &Process.alive?/1, &and/2])
+    end
+
     test "function with exact arity of values on stack" do
       assert_eval(1, [1, &identity/1])
     end
