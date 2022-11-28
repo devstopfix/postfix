@@ -1,3 +1,4 @@
+# credo:disable-for-this-file Credo.Check.Refactor.Apply
 defmodule Postfix.Assertions do
   @moduledoc "Assertion helpers (requires module with an eval/1 function)"
 
