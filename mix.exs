@@ -6,7 +6,7 @@ defmodule Postfix.MixProject do
       app: :postfix,
       deps: deps(),
       description: "Postfix evaluator",
-      elixir: "~> 1.10",
+      elixir: "~> 1.11",
       package: package(),
       start_permanent: Mix.env() == :prod,
       version: "1.1.333"
