@@ -4,6 +4,7 @@ defmodule Postfix.StackTest do
   doctest Postfix.Stack
 
   import Function, only: [identity: 1]
+  alias Postfix.Stack.Dup
 
   describe "eval/1" do
     test "empty program returns nil" do
@@ -91,6 +92,12 @@ defmodule Postfix.StackTest do
     test "errors are returned as tuples" do
       terms = [[{:a, 1}], :b, &Keyword.fetch!/2]
       assert {:error, %KeyError{key: :b, term: [a: 1]}} = eval(terms)
+    end
+  end
+
+  describe "eval/1 stack shuffling" do
+    test "duplicate" do
+      assert_eval(2, [1, Dup, &+/2])
     end
   end
 end

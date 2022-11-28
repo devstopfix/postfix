@@ -1,5 +1,19 @@
 defmodule Postfix.Stack do
-  @moduledoc "Evaluation of terms using postfix order and a stack"
+  @moduledoc """
+  Evaluation of terms using postfix order and a stack.
+
+  Shuffle words can manipulate the stack and are represented as atoms
+  aliased under this namespace using the Factor vocabulary:
+
+  * `Dup` - duplicate the item at the top of the stack
+
+  Create the aliases with:
+
+      alias Postfix.Stack.{Dup, ...}
+
+  """
+
+  alias __MODULE__.Dup
 
   defmodule StackError do
     @moduledoc "Raised when stack has insufficient values available for the arity of the function"
@@ -81,6 +95,13 @@ defmodule Postfix.Stack do
       v ->
         eval_with_stack(rest, [v | new_stack])
     end
+  end
+
+  # Stack shuffling
+
+  # Duplicate
+  defp eval_with_stack([Dup | rest], [v | stack]) do
+    eval_with_stack(rest, [v | [v | stack]])
   end
 
   # Push value onto stack
