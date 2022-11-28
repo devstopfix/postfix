@@ -1,8 +1,7 @@
 defmodule Postfix.SimpleTest do
   use ExUnit.Case
+  use Postfix.Assertions, eval: Postfix.Simple
   doctest Postfix.Simple
-
-  import Postfix.Simple, only: [eval: 1]
 
   describe "eval/1" do
     test "zero arity" do
@@ -35,9 +34,5 @@ defmodule Postfix.SimpleTest do
     test "arithmetic" do
       assert_eval(4, [3, 4, &-/2, 5, &+/2])
     end
-  end
-
-  defp assert_eval(expected, terms) do
-    assert {:ok, expected} == eval(terms)
   end
 end

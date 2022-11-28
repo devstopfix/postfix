@@ -1,9 +1,9 @@
 defmodule Postfix.StackTest do
   use ExUnit.Case
+  use Postfix.Assertions, eval: Postfix.Stack
   doctest Postfix.Stack
 
   import Function, only: [identity: 1]
-  import Postfix.Stack, only: [eval: 1]
 
   describe "eval/1" do
     test "empty program returns nil" do
@@ -83,9 +83,9 @@ defmodule Postfix.StackTest do
     test "continues when function returns :error atom" do
       assert_eval(:error, ["fab", 10, &Integer.parse/2])
     end
-  end
 
-  defp assert_eval(expected, terms) do
-    assert {:ok, expected} == eval(terms)
+    test "halts with reason when function returns :error tuple" do
+      refute_eval(:invalid_format, ["next Thursday", &DateTime.from_iso8601/1, &Atom.to_string/1])
+    end
   end
 end
