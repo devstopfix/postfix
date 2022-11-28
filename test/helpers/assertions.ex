@@ -6,16 +6,21 @@ defmodule Postfix.Assertions do
     eval_module = Keyword.fetch!(opts, :eval)
 
     quote do
+      # Evalute the program
       def eval(terms) do
         apply(unquote(eval_module), :eval, [terms])
       end
 
+      # Assert the program succeeds and returns the expected output
       def assert_eval(expected, terms) do
-        assert {:ok, expected} == apply(unquote(eval_module), :eval, [terms])
+        ExUnit.Assertions.assert({:ok, expected} == apply(unquote(eval_module), :eval, [terms]))
       end
 
+      # Assert the program fails and returns the expected error
       def refute_eval(expected, terms) do
-        assert {:error, expected} == apply(unquote(eval_module), :eval, [terms])
+        ExUnit.Assertions.assert(
+          {:error, expected} == apply(unquote(eval_module), :eval, [terms])
+        )
       end
     end
   end
