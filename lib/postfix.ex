@@ -1,6 +1,9 @@
 defmodule Postfix do
   @moduledoc "Evaluator of terms using postfix notation"
 
+  alias Postfix.Simple
+  alias Postfix.Stack
+
   @doc """
   Evaluate a list of values and functions
 
@@ -15,6 +18,16 @@ defmodule Postfix do
   """
   @spec eval([term]) :: {:ok, term} | {:error, any}
   def eval(terms) do
-    Postfix.Simple.eval(terms)
+    Simple.eval(terms)
+  end
+
+  @doc """
+  Evaluate a list of values and functions using a stack.
+
+  See `Postfix.Stack.eval/1`
+  """
+  @spec eval_stack([term]) :: {:ok, term} | {:error, any}
+  def eval_stack(terms) do
+    Stack.eval(terms)
   end
 end

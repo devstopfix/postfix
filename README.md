@@ -20,6 +20,11 @@ and used as the result.
 Any function that fails with an `{:error, _}` tuple short-circuits and 
 becomes the result of the evaluation.
 
+There are two implementations:
+
+* `Postfix.Simple` for simple pipelines using a list
+* `Postfix.Stack` which uses a list for the program and a stack for operands and results
+
 ### Limitations
 
 It is not possible to pass a function to a higher-order function as it will be evaluated.
@@ -48,11 +53,6 @@ filter_odd = fn xs -> Enum.filter(xs, is_odd?) end
 {:ok, [2]} = Postfix.eval([1..3, filter_odd])
 ```
 
-### Improvements
-
-A stack will be added so results of multiple functions can become inputs
-to another function.
-
 ## Installation
 
 This package can be installed
@@ -61,7 +61,7 @@ by adding `postfix` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:postfix, "~> 1.0"}
+    {:postfix, "~> 1.1"}
   ]
 end
 ```
