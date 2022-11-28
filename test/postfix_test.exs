@@ -39,7 +39,7 @@ defmodule PostfixTest do
 
   describe "README" do
     test "example" do
-      assert_eval(10, [2, 3, &*/2, 4, &+/2])
+      assert_eval(20, [7, 2, &-/2, 4, &*/2])
     end
 
     test "high-order functions fail" do
