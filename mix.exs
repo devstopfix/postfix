@@ -4,10 +4,12 @@ defmodule Postfix.MixProject do
   def project do
     [
       app: :postfix,
-      version: "1.0.331",
+      deps: deps(),
+      description: "Postfix evaluator",
       elixir: "~> 1.10",
+      package: package(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      version: "1.0.332"
     ]
   end
 
@@ -19,7 +21,15 @@ defmodule Postfix.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/devstopfix/postfix-elixir"}
     ]
   end
 end

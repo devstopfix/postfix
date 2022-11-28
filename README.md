@@ -3,8 +3,11 @@
 Simple evaluator of a list of values and functions given in [postfix][postfix] order. 
 
 ```elixir
-{:ok, 10} = Postfix.eval([2, 3, &*/2, 4, &+/2])
+{:ok, 20} = Postfix.eval([7, 2, &-/2, 4, &*/2])
 ```
+
+[![Hex version badge](https://img.shields.io/hexpm/v/postfix.svg)](https://hex.pm/packages/postfix)
+[![ci](https://github.com/devstopfix/postfix-elixir/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/devstopfix/postfix-elixir/actions/workflows/ci.yml)
 
 ## Usage
 
@@ -15,7 +18,7 @@ If any function returns an `{:ok, value}` tuple then the value is unwrapped
 and used as the result.
 
 Any function that fails with an `{:error, _}` tuple short-circuits and 
-becomes the result of the evaluation,
+becomes the result of the evaluation.
 
 ### Limitations
 
@@ -63,4 +66,11 @@ def deps do
 end
 ```
 
+## License
+
+Copyright 2022 J Every
+
+Released under the [MIT License][mit]
+
+[mit]: https://opensource.org/licenses/MIT
 [postfix]: https://en.wikipedia.org/wiki/Reverse_Polish_notation
