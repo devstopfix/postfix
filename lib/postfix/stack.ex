@@ -33,9 +33,11 @@ defmodule Postfix.Stack do
   given to the function in fifo order (left-to-right).
 
   The return value of any function is pushed onto the stack. If the function
-  returns an `{:ok, value}` tuple then the value is unwrapped. If any function
-  returns an `{:error, error}` tuple then the evaluation is short-circuited
-  and the error tuple is returned.
+  returns an `{:ok, value}` tuple then the value is unwrapped.
+
+  If any function returns an `{:error, error}` tuple then the evaluation is
+  short-circuited and the error tuple is returned. Errors are rescued and
+  returned as `{:error, %Error{}}` tuples.
 
   Returns the last value on the stack within an `{:ok, ...}` tuple,
   or `{:ok, nil}` if the stack is empty.
@@ -57,9 +59,16 @@ defmodule Postfix.Stack do
       raise StackError, arity: arity, stack: stack
     end
 
-    args = Enum.reverse(rev_args)
+    result =
+      try do
+        args = Enum.reverse(rev_args)
+        apply(f, args)
+      rescue
+        e ->
+          {:error, e}
+      end
 
-    case(apply(f, args)) do
+    case result do
       {:error, error} ->
         {:error, error}
 

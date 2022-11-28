@@ -87,5 +87,10 @@ defmodule Postfix.StackTest do
     test "halts with reason when function returns :error tuple" do
       refute_eval(:invalid_format, ["next Thursday", &DateTime.from_iso8601/1, &Atom.to_string/1])
     end
+
+    test "errors are returned as tuples" do
+      terms = [[{:a, 1}], :b, &Keyword.fetch!/2]
+      assert {:error, %KeyError{key: :b, term: [a: 1]}} = eval(terms)
+    end
   end
 end
