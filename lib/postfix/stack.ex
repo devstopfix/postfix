@@ -26,6 +26,9 @@ defmodule Postfix.Stack do
       iex> Postfix.Stack.eval([1, 2, &-/2])
       {:ok, -1}
 
+      iex> Postfix.Stack.eval([1, 0, &div/2])
+      {:error, %ArithmeticError{}}
+
   Values are pushed on to the stack.
 
   Functions are defined by their arity and there must be sufficient operands available
