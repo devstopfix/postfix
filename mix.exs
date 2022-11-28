@@ -20,20 +20,20 @@ defmodule Postfix.MixProject do
     ]
   end
 
-  def deps do
+  defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
-  def package do
+  defp package do
     [
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/devstopfix/postfix-elixir"}
     ]
   end
 
-  def elixirc_paths(:test), do: ["test/helpers"] ++ elixirc_paths(:prod)
-  def elixirc_paths(_), do: ["lib"]
+  defp elixirc_paths(:test), do: ["test/helpers"] ++ elixirc_paths(:prod)
+  defp elixirc_paths(_), do: ["lib"]
 end
