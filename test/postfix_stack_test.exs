@@ -79,6 +79,10 @@ defmodule Postfix.StackTest do
         &==/2
       ])
     end
+
+    test "continues when function returns :error atom" do
+      assert_eval(:error, ["fab", 10, &Integer.parse/2])
+    end
   end
 
   defp assert_eval(expected, terms) do

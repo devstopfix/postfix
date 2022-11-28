@@ -9,7 +9,7 @@ defmodule Postfix.MixProject do
       elixir: "~> 1.11",
       package: package(),
       start_permanent: Mix.env() == :prod,
-      version: "1.1.333"
+      version: "1.1.334"
     ]
   end
 
