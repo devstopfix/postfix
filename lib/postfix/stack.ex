@@ -6,6 +6,7 @@ defmodule Postfix.Stack do
   aliased under this namespace using the Factor vocabulary:
 
   * `Clear` - clear the stack
+  * `Drop` - drops the top value
   * `Dup` - duplicate the item at the top of the stack
   * `Swap` - swap the last two items on the stack
 
@@ -15,7 +16,7 @@ defmodule Postfix.Stack do
 
   """
 
-  alias __MODULE__.{Clear, Dup, Swap}
+  alias __MODULE__.{Clear, Drop, Dup, Swap}
 
   defmodule StackError do
     @moduledoc "Raised when stack has insufficient values available for the arity of the function"
@@ -103,6 +104,10 @@ defmodule Postfix.Stack do
 
   defp eval_with_stack([Clear | rest], _stack) do
     eval_with_stack(rest, [])
+  end
+
+  defp eval_with_stack([Drop | rest], [_ | stack]) do
+    eval_with_stack(rest, stack)
   end
 
   # Duplicate
