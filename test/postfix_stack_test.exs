@@ -4,7 +4,7 @@ defmodule Postfix.StackTest do
   doctest Postfix.Stack
 
   import Function, only: [identity: 1]
-  alias Postfix.Stack.Dup
+  alias Postfix.Stack.{Clear, Dup}
 
   describe "eval/1" do
     test "empty program returns nil" do
@@ -104,6 +104,11 @@ defmodule Postfix.StackTest do
   end
 
   describe "eval/1 stack shuffling" do
+    test "clear" do
+      assert_eval(nil, [1, 2, 3, Clear])
+      assert_eval(3, [1, 2, Clear, 3])
+    end
+
     test "duplicate" do
       assert_eval(2, [1, Dup, &+/2])
     end
