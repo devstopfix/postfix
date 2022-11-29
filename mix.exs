@@ -10,7 +10,7 @@ defmodule Postfix.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       package: package(),
       start_permanent: Mix.env() == :prod,
-      version: "1.1.339"
+      version: "1.2.339"
     ]
   end
 

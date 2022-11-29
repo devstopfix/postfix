@@ -6,6 +6,8 @@ Simple evaluator of a list of values and functions given in [postfix][postfix] o
 {:ok, 20} = Postfix.eval([7, 2, &-/2, 4, &*/2])
 ```
 
+Inspired by [Factor][factor]. See [Postfix.Stack][stack] for examples.
+
 [![Hex version badge](https://img.shields.io/hexpm/v/postfix.svg)](https://hex.pm/packages/postfix)
 [![ci](https://github.com/devstopfix/postfix-elixir/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/devstopfix/postfix-elixir/actions/workflows/ci.yml)
 
@@ -23,7 +25,7 @@ becomes the result of the evaluation.
 There are two implementations:
 
 * `Postfix.Simple` for simple pipelines using a list
-* `Postfix.Stack` which uses a list for the program and a stack for operands and results
+* [Postfix.Stack][stack] which uses a list for the program and a stack for operands and results
 
 ### Limitations
 
@@ -61,7 +63,7 @@ by adding `postfix` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:postfix, "~> 1.1"}
+    {:postfix, "~> 1.2"}
   ]
 end
 ```
@@ -72,5 +74,7 @@ Copyright 2022 J Every
 
 Released under the [MIT License][mit]
 
+[factor]: https://factorcode.org/
 [mit]: https://opensource.org/licenses/MIT
 [postfix]: https://en.wikipedia.org/wiki/Reverse_Polish_notation
+[stack]: https://hexdocs.pm/postfix/Postfix.Stack.html
