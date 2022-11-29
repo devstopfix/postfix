@@ -5,7 +5,9 @@ defmodule Postfix.Stack do
   Shuffle words can manipulate the stack and are represented as atoms
   aliased under this namespace using the Factor vocabulary:
 
+  * `Clear` - clear the stack
   * `Dup` - duplicate the item at the top of the stack
+  * `Swap` - swap the last two items on the stack
 
   Create the aliases with:
 
@@ -13,7 +15,7 @@ defmodule Postfix.Stack do
 
   """
 
-  alias __MODULE__.{Clear, Dup}
+  alias __MODULE__.{Clear, Dup, Swap}
 
   defmodule StackError do
     @moduledoc "Raised when stack has insufficient values available for the arity of the function"
@@ -99,7 +101,6 @@ defmodule Postfix.Stack do
 
   # Stack shuffling
 
-  # Clear
   defp eval_with_stack([Clear | rest], _stack) do
     eval_with_stack(rest, [])
   end
@@ -107,6 +108,10 @@ defmodule Postfix.Stack do
   # Duplicate
   defp eval_with_stack([Dup | rest], [v | stack]) do
     eval_with_stack(rest, [v | [v | stack]])
+  end
+
+  defp eval_with_stack([Swap | rest], [v1 | [v2 | stack]]) do
+    eval_with_stack(rest, [v2 | [v1 | stack]])
   end
 
   # Push value onto stack
