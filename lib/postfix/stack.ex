@@ -9,11 +9,11 @@ defmodule Postfix.Stack do
 
   Create the aliases with:
 
-      alias Postfix.Stack.{Dup, ...}
+      alias Postfix.Stack.{Clear, Dup, ...}
 
   """
 
-  alias __MODULE__.Dup
+  alias __MODULE__.{Clear, Dup}
 
   defmodule StackError do
     @moduledoc "Raised when stack has insufficient values available for the arity of the function"
@@ -98,6 +98,11 @@ defmodule Postfix.Stack do
   end
 
   # Stack shuffling
+
+  # Clear
+  defp eval_with_stack([Clear | rest], _stack) do
+    eval_with_stack(rest, [])
+  end
 
   # Duplicate
   defp eval_with_stack([Dup | rest], [v | stack]) do
