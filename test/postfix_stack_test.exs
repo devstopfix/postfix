@@ -4,7 +4,7 @@ defmodule Postfix.StackTest do
   doctest Postfix.Stack
 
   import Function, only: [identity: 1]
-  alias Postfix.Stack.{Clear, Dup}
+  alias Postfix.Stack.{Clear, Dup, Swap}
 
   describe "eval/1" do
     test "empty program returns nil" do
@@ -111,6 +111,10 @@ defmodule Postfix.StackTest do
 
     test "duplicate" do
       assert_eval(2, [1, Dup, &+/2])
+    end
+
+    test "swap" do
+      assert_eval(-1, [2, 1, Swap, &-/2])
     end
   end
 end
