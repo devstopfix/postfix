@@ -117,4 +117,10 @@ defmodule Postfix.StackTest do
       assert_eval(-1, [2, 1, Swap, &-/2])
     end
   end
+
+  describe "eval/1 with factor example" do
+    test "GST" do
+      assert_eval(44.38875, [44.50, Dup, 0.05, &*/2, Swap, 0.9975, &*/2])
+    end
+  end
 end
