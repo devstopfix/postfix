@@ -6,7 +6,7 @@ defmodule Postfix.Assertions do
     eval_module = Keyword.fetch!(opts, :eval)
 
     quote do
-      # Evalute the program
+      # Evaluate the program
       def eval(terms) do
         apply(unquote(eval_module), :eval, [terms])
       end
