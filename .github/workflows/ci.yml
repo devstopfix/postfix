@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        otp: ["23.3.4.18", "24.3.7.4"]
+        otp: ["23.3.4", "24.3.7"]
         elixir: ["1.14", "1.13", "1.12", "1.11.4"]
         include:
           - elixir: "1.14"
