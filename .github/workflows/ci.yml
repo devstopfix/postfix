@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        otp: ["23.3", "24.3"]
+        otp: ["23.3.4", "24.3.4"]
         elixir: ["1.14", "1.13", "1.12", "1.11.4"]
         include:
           - elixir: "1.14"
@@ -19,6 +19,7 @@ jobs:
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
+          version-type: 'strict'
       - run: mix deps.get
       - run: mix compile --warnings-as-errors
       - run: mix credo --strict
